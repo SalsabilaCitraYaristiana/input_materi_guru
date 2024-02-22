@@ -49,20 +49,22 @@ class GuruController extends Controller
     {
         try {
             $request->validate([
-                'guru' => 'required',
+                'namaguru' => 'required',
                 'mapel' => 'required',
-                'tahun' => 'required|numeric|min:2000|max:' . (date('Y') + 1),
-                'judul' => 'required',
-                'deskripsi' => 'required',
+                'tahunajaran' => 'required|numeric|min:2000|max:' . (date('Y') + 1),
+                'semester' => 'required',
+                'judulmateri' => 'required',
+                'deskripsimateri' => 'required',
             ]);
 
-            $tahun = date('Y');
-            $semester = ceil(($request->tahun - 2023) / 2);
+            $tahunajaran = date('Y');
+            $semester = ceil(($request->tahunajaran - 2023) / 2);
 
-            $existingMateri = Guru::where('guru', $request->guru)
+            $existingMateri = Guru::where('namaguru', $request->namaguru)
             ->where('mapel', $request->mapel)
-            ->where('tahun', $tahun)
-            ->where('judul', $request->judul)
+            ->where('tahunajaran', $tahunajaran)
+            ->where('semester', $semester)
+            ->where('judulmateri', $request->judulmateri)
             // ->where('semester', $semester)
             ->first();
     
@@ -71,11 +73,12 @@ class GuruController extends Controller
         }
 
             $guru = Guru::create([
-                'guru' => $request->guru,
+                'namaguru' => $request->namaguru,
                 'mapel' => $request->mapel,
-                'tahun' => $request->tahun,
-                'judul' => $request->judul,
-                'deskripsi' => $request->deskripsi,
+                'tahunajaran' => $request->tahunajaran,
+                'semester' => $request->semester,
+                'judulmateri' => $request->judulmateri,
+                'deskripsimateri' => $request->deskripsimateri,
                 // 'semester' => $request->semester,
             ]);
 
@@ -134,17 +137,21 @@ class GuruController extends Controller
     {
         try {
             $request->validate([
-                'guru' => 'required',
+                'namaguru' => 'required',
                 'mapel' => 'required',
-                'judul' => 'required',
-                'deskripsi' => 'required',
+                'tahunajaran' => 'required|numeric|min:2000|max:' . (date('Y') + 1),
+                'semester' => 'required',
+                'judulmateri' => 'required',
+                'deskripsimateri' => 'required',
             ]);
             $guru = Guru::find($id);
             $guru->update([
-                'guru' => $request->guru,
+                'namaguru' => $request->namaguru,
                 'mapel' => $request->mapel,
-                'judul' => $request->judul,
-                'deskripsi' => $request->deskripsi,
+                'tahunajaran' => $request->tahunajaran,
+                'semester' => $request->semester,
+                'judulmateri' => $request->judulmateri,
+                'deskripsimateri' => $request->deskripsimateri,
             ]);
             $dataTerbaru = Guru::where('id', $guru->id)->first();
             if ($dataTerbaru) {
