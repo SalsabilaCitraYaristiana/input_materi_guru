@@ -13,18 +13,12 @@ return new class extends Migration
     {
         Schema::create('gurus', function (Blueprint $table) {
             $table->id();
-            $table->string('namaguru');
-            $table->string('mapel');
-            $table->string('tahunajaran');
-            $table->string('semester');
-            $table->string('judulmateri');
-            $table->text('deskripsimateri');
+            $table->string('materipokok');
+            $table->string('tujuanpembelajaran');
+            $table->string('capaianpembelajaran');
             $table->softDeletes();
             $table->timestamps();
         });
-        // Schema::table('materials', function (Blueprint $table) {
-        //     $table->unsignedTinyInteger('semester')->default(1)->after('year');
-        // });
     }
 
     

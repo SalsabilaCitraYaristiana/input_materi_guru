@@ -12,11 +12,8 @@ class Guru extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'namaguru', 
-        'mapel', 
-        'tahunajaran',
-        'semester',
-        'judulmateri', 
-        'deskripsimateri',
+        'materipokok', 
+        'tujuanpembelajaran', 
+        'capaianpembelajaran',
     ];
 }
